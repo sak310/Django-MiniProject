@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+</head>
+<body>
+    <h1>{% if employee %}Edit{% else %}Create{% endif %} Employee</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <table border="0" cellpadding="8">
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" name="name" id="name" value="{{ employee.name|default:'' }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" name="email" id="email" value="{{ employee.email|default:'' }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age:</label></td>
+                <td><input type="number" name="age" id="age" value="{{ employee.age|default:'' }}" required></td>
+            </tr>
+        </table>
+
+        <br>
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'employee_list' %}">Cancel</a>
+    </form>
+</body>
+</html>
